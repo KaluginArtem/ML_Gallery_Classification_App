@@ -1,0 +1,6 @@
+animals
+documents
+food
+human
+landscapes
+other
