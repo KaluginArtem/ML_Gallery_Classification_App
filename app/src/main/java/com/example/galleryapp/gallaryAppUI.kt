@@ -7,7 +7,6 @@ import com.example.galleryapp.navigation.AppNavigation
 @Composable
 fun GalleryAppUI() {
     MaterialTheme {
-        // Вызываем основной UI с bottom navigation
         AppNavigation()
     }
 }

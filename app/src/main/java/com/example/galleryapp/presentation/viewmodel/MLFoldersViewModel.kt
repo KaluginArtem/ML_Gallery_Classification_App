@@ -45,13 +45,11 @@ class MLFoldersViewModel @Inject constructor(
 
     private fun loadAndClassifyPhotos() {
         viewModelScope.launch {
-            // Загружаем список фотографий из репозитория (работает в IO-потоке)
             val photoList = withContext(Dispatchers.IO) {
                 imageRepository.loadImagesFromGallery()
             }
             _photos.value = photoList
 
-            // Локальный кэш для хранения результатов классификации
             val classificationCache = mutableMapOf<Uri, String>()
 
             photoList.forEach { uri ->
@@ -62,7 +60,6 @@ class MLFoldersViewModel @Inject constructor(
                     }
                     result?.let { label ->
                         classificationCache[uri] = label
-                        // Обновляем репозиторий после обработки каждого изображения
                         mlRepository.updateResults(classificationCache.toMap())
                     }
                 }

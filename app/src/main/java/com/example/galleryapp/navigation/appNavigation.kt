@@ -37,7 +37,6 @@ fun AppNavigation() {
     val viewModel: GalleryViewModel = hiltViewModel()
     val photos by viewModel.photos.collectAsState(initial = emptyList())
 
-    // Создаём экземпляр ImageClassifier (сохраним его в remember, чтобы не пересоздавал каждый recomposition)
     val classifier = remember { ImageClassifier(context) }
 
     Scaffold(
@@ -53,7 +52,6 @@ fun AppNavigation() {
             }
             composable(Screen.Folders.route) {
                 FoldersScreen(onFolderClick = { folder ->
-                    // Переход на экран с фотографиями выбранной папки
                     navController.navigate(
                         Screen.FolderPhotos.createRoute(folder.id, folder.name)
                     )
@@ -77,10 +75,8 @@ fun AppNavigation() {
             composable(Screen.ML.route) {
                 MLFoldersScreen(
                     onFolderClick = { category ->
-                        // При клике переходим на экран детального просмотра ML папки
                         navController.navigate(Screen.MLFolderPhotos.createRoute(category))
                     }
-                    // MLFoldersViewModel создается внутри MLFoldersScreen с помощью hiltViewModel()
                 )
             }
             composable(
@@ -92,10 +88,8 @@ fun AppNavigation() {
                 val folderName = backStackEntry.arguments?.getString("folderName") ?: ""
                 MLFolderPhotosScreen(
                     onPhotoClick = { uri ->
-                        // Обработка клика на фотографию ML папки (например, открытие полноэкранного просмотра)
                     },
                     onBackClick = { navController.popBackStack() }
-                    // MLFolderPhotosViewModel создается внутри MLFolderPhotosScreen с помощью hiltViewModel()
                 )
             }
 

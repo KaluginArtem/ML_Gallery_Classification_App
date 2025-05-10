@@ -20,7 +20,6 @@ fun FullScreenImageDialog(
     onDismiss: () -> Unit
 ) {
     Dialog(onDismissRequest = onDismiss) {
-        // Используем Box, занимающий весь экран, с прозрачным фоном и центровкой
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -30,10 +29,8 @@ fun FullScreenImageDialog(
             AsyncImage(
                 model = imageUri,
                 contentDescription = "Full screen image",
-                contentScale = ContentScale.Fit, // сохраняем пропорции без растяжения
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    // Ограничиваем фото до 95% ширины экрана;
-                    // высота будет рассчитываться автоматически, чтобы сохранить аспект
                     .fillMaxWidth(0.95f)
             )
         }

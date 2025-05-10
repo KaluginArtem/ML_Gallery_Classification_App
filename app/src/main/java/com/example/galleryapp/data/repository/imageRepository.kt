@@ -11,7 +11,6 @@ import javax.inject.Singleton
 class ImageRepository @Inject constructor(
     private val context: Context
 ) {
-    // Загрузка всех изображений из галереи
     fun loadImagesFromGallery(): List<Uri> {
         val imageList = mutableListOf<Uri>()
         val projection = arrayOf(MediaStore.Images.Media._ID)

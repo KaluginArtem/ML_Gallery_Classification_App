@@ -24,9 +24,7 @@ fun FolderPhotosScreen(
     onBack: () -> Unit,
     viewModel: FolderPhotosViewModel = hiltViewModel()
 ) {
-    // Подписываемся на StateFlow из ViewModel
     val images by viewModel.images.collectAsState(initial = emptyList())
-    // Загружаем изображения для данной папки один раз при изменении bucketId
     LaunchedEffect(bucketId) {
         viewModel.loadImages(bucketId)
     }

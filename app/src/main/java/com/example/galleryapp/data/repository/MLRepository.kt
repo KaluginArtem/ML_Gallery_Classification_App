@@ -8,8 +8,6 @@ import javax.inject.Singleton
 
 @Singleton
 class MLRepository @Inject constructor() {
-    // Состояние с результатами ML классификации
-    // Например: Map<Uri, String> — для каждого изображения его метка.
     private val _mlResults = MutableStateFlow<Map<Uri, String>>(emptyMap())
     val mlResults: StateFlow<Map<Uri, String>> = _mlResults
 

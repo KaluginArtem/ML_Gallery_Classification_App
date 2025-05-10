@@ -26,16 +26,14 @@ fun FoldersScreen(
     viewModel: FoldersViewModel = hiltViewModel(),
     onFolderClick: (GalleryFolder) -> Unit = {}
 ) {
-    // Подписываемся на StateFlow из ViewModel
     val folders by viewModel.folders.collectAsState(initial = emptyList())
 
-    // Загружаем список папок один раз при старте экрана
     LaunchedEffect(Unit) {
         viewModel.loadFolders()
     }
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2), // Показать 2 колонки
+        columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(ImagePaddingSource.defaultPadding)
     ) {
@@ -52,7 +50,6 @@ fun GalleryFolderItem(folder: GalleryFolder, onClick: () -> Unit) {
             .padding(8.dp)
             .clickable { onClick() }
     ) {
-        // Показываем обложку папки (первое фото, найденное для данной папки)
         AsyncImage(
             model = folder.coverUri,
             contentDescription = folder.name,
@@ -61,7 +58,6 @@ fun GalleryFolderItem(folder: GalleryFolder, onClick: () -> Unit) {
                 .height(150.dp)
                 .fillMaxWidth()
         )
-        // Наложение с названием папки и количеством фотографий
         Box(
             modifier = Modifier
                 .fillMaxSize()

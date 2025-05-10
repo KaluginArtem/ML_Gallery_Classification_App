@@ -13,14 +13,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    // Предоставляем Context
     @Provides
     @Singleton
     fun provideApplicationContext(@ApplicationContext context: Context): Context {
         return context
     }
 
-    // Предоставляем ImageRepository
     @Provides
     @Singleton
     fun provideImageRepository(context: Context): ImageRepository {

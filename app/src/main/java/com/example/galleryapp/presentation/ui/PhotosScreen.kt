@@ -26,7 +26,7 @@ import java.util.*
 @Composable
 fun PhotosScreen(imageUris: List<Uri>, onImageClick: (Uri) -> Unit) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(3), // Отображение в сетке (3 столбца)
+        columns = GridCells.Fixed(3),
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(ImagePaddingSource.gridItemPadding)
     ) {
@@ -47,10 +47,7 @@ fun PhotosScreenWrapper(viewModel: GalleryViewModel = hiltViewModel()) {
         viewModel.loadPhotos()
     }
 
-
-
     Column(modifier = Modifier.fillMaxSize()) {
-        // Поисковая панель в верхней части экрана
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -70,7 +67,6 @@ fun PhotosScreenWrapper(viewModel: GalleryViewModel = hiltViewModel()) {
                     if (dateRange != null) {
                         viewModel.searchPhotos(dateRange.first, dateRange.second)
                     } else {
-                        // Если формат неверный — можно загрузить все фото или показать ошибка
                         viewModel.loadPhotos()
                     }
                 },
@@ -79,7 +75,6 @@ fun PhotosScreenWrapper(viewModel: GalleryViewModel = hiltViewModel()) {
                 Text("Найти")
             }
         }
-        // Отображаем фотографии (результат поиска или стандартная загрузка)
         PhotosScreen(imageUris = photos, onImageClick = { uri ->
             selectedImageUri = uri
         })
@@ -99,7 +94,6 @@ fun parseFullDate(input: String): Pair<Long, Long>? {
         val date = sdf.parse(input) ?: return null
         val calendar = Calendar.getInstance().apply {
             time = date
-            // Устанавливаем начало дня: 00:00:00.000
             set(Calendar.HOUR_OF_DAY, 0)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
@@ -107,7 +101,6 @@ fun parseFullDate(input: String): Pair<Long, Long>? {
         }
         val start = calendar.timeInMillis
 
-        // Устанавливаем конец дня: 23:59:59.999
         calendar.apply {
             set(Calendar.HOUR_OF_DAY, 23)
             set(Calendar.MINUTE, 59)

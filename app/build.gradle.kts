@@ -48,10 +48,8 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.room:room-runtime:2.5.0"){
-        exclude(group = "com.intellij", module = "annotations")
-    }
-    kapt("androidx.room:room-compiler:2.5.0")
+    implementation ("androidx.room:room-runtime:2.5.0")
+    kapt ("androidx.room:room-compiler:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0")
 
 
@@ -85,7 +83,6 @@ dependencies {
 }
 
 kapt {
-    includeCompileClasspath = false
     arguments {
         arg("room.schemaLocation", "$projectDir/schemas")
     }

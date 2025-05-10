@@ -23,7 +23,6 @@ fun MLFoldersScreen(
     onFolderClick: (String) -> Unit,
     viewModel: MLFoldersViewModel = hiltViewModel()
 ) {
-    // Получаем результаты из репозитория через viewModel.mlResults
     val mlResults by viewModel.mlRepository.mlResults.collectAsState()
 
     val groupedResults = remember(mlResults) {

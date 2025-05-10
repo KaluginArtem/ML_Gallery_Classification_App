@@ -44,11 +44,9 @@ class FolderRepository @Inject constructor(
                 val folderName = cursor.getString(bucketNameColumn)
                 val bucketId = cursor.getString(bucketIdColumn)
 
-                // Если папка уже существует – обновляем количество фотографий
                 if (folderMap.containsKey(bucketId)) {
                     folderMap[bucketId]?.let { it.count += 1 }
                 } else {
-                    // Создаём новую папку с первой фотографией в качестве обложки
                     folderMap[bucketId] = GalleryFolder(
                         id = bucketId,
                         name = folderName,
